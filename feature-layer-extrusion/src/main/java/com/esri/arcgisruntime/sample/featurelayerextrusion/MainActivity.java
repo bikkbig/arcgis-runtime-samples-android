@@ -49,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
   private final String TAG = MainActivity.class.getSimpleName();
 
   private SceneView mSceneView;
-  private SimpleRenderer mSimpleRenderer;
 
   private boolean showTotalPopulation;
 
@@ -65,7 +64,8 @@ public class MainActivity extends AppCompatActivity {
     final Button togglePopButton = (Button) findViewById(R.id.toggle_button);
 
     // get us census data as a service feature table
-    ServiceFeatureTable serviceFeatureTable = new ServiceFeatureTable(getResources().getString(R.string.us_census_feature_service));
+    ServiceFeatureTable serviceFeatureTable = new ServiceFeatureTable(
+        getResources().getString(R.string.us_census_feature_service));
 
     //TODO Remove
     final GraphicsOverlay extrusionOverlay = new GraphicsOverlay(GraphicsOverlay.RenderingMode.DYNAMIC);
@@ -85,7 +85,8 @@ public class MainActivity extends AppCompatActivity {
             //TODO Remove
             Graphic stateGraphic = new Graphic(state.getGeometry());
             int totalPopulation = Integer.parseInt(state.getAttributes().get("POP2007").toString());
-            int densityPopulation = (int) Math.round(Double.parseDouble(state.getAttributes().get("POP07_SQMI").toString()));
+            int densityPopulation = (int) Math
+                .round(Double.parseDouble(state.getAttributes().get("POP07_SQMI").toString()));
             Log.d("density", String.valueOf(densityPopulation));
             // scale the total population down by a factor of 10 and set it as an attribute
             stateGraphic.getAttributes().put("TOTAL_POP", totalPopulation / 10);
